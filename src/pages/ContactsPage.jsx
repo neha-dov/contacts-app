@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import ContactCard from '../components/ContactCard';
 
+
 const ContactsPage = () => {
         const [contacts, setContacts] = useState([]);
 
