@@ -1,12 +1,46 @@
-import ContactsPage from './pages/ContactsPage';
+// import ContactsPage from './pages/ContactsPage';
 
-function App() {
+// function App() {
+//   return (
+//     <div>
+//       <h1 style={{ textAlign: 'center' }}>My Contacts</h1>
+//       <ContactsPage />
+//     </div>
+//   );
+// }
+
+// export default App;
+import { useEffect, useState } from 'react';
+import ContactCard from './components/ContactCard';
+import ContactDetail from './components/ContactDetail';
+import './App.css'; // make sure this imports your CSS
+
+export default function App() {
+  const [contacts, setContacts] = useState([]);
+  const [selectedContact, setSelectedContact] = useState(null);
+
+  useEffect(() => {
+    fetch('https://jsonplaceholder.typicode.com/users')
+      .then((res) => res.json())
+      .then(setContacts);
+  }, []);
+
   return (
     <div>
-      <h1 style={{ textAlign: 'center' }}>My Contacts</h1>
-      <ContactsPage />
+      <h1>My Contacts</h1>
+      {selectedContact ? (
+        <ContactDetail user={selectedContact} onBack={() => setSelectedContact(null)} />
+      ) : (
+        <div className="contacts-grid">
+          {contacts.map((user) => (
+            <ContactCard
+              key={user.id}
+              user={user}
+              onClick={() => setSelectedContact(user)}
+            />
+          ))}
+        </div>
+      )}
     </div>
   );
 }
-
-export default App;
