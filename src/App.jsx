@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import ContactCard from './components/ContactCard';
 import ContactDetail from './components/ContactDetail';
-import './App.css'; // make sure this imports your CSS
+import './App.css';
 
 export default function App() {
   const [contacts, setContacts] = useState([]);
